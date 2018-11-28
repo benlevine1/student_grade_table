@@ -74,7 +74,7 @@ function addStudent(){
             course: $('#course').val(),
             grade: $('#studentGrade').val()
       }
-      if(studentInfo.name !== '' && studentInfo.course !== '' && studentInfo.grade !== '' && parseInt(studentInfo.grade) >= 0 &&  parseInt(studentInfo.grade) <= 100) {
+      if(studentInfo.name !== '' || studentInfo.course !== '' || studentInfo.grade !== '' || parseFloat(studentInfo.grade) >= 0 || parseFloat(studentInfo.grade) <= 100) {
             student_array.push(studentInfo);
             clearAddStudentFormInputs();
             updateStudentList();
@@ -95,10 +95,12 @@ function clearAddStudentFormInputs(){
  */
 function renderStudentOnDom(){
       for(var studentIndex = 0; studentIndex < student_array.length; studentIndex++){
-            var newRow = $('<tr>')
+            var newRow = $('<tr>', {
+                  class: 'student-table-row'
+            })
             var displayName = $('<td>',{
                   text: student_array[studentIndex].name,
-                  'class': 'col-xs-3'
+                  'class': 'col-xs-3 '
             })
             var displayCourse = $('<td>',{
                   text: student_array[studentIndex].course,
@@ -106,17 +108,31 @@ function renderStudentOnDom(){
             })
             var displayGrade = $('<td>',{
                   text: student_array[studentIndex].grade,
-                  'class': 'col-xs-3'
+                  'class': 'col-xs-'
             })
             var deleteButton = $('<td>').addClass('col-xs-3').append($('<button>',{
                   text: 'Delete',
-                  'class': 'btn btn-danger' 
+                  class: 'btn btn-danger',
+                  attr: {
+                        'data-index': studentIndex
+                  },
+                  click: function(){
+                        removeStudent();
+                  }
+                   
             }))
             newRow.append(displayName, displayCourse, displayGrade, deleteButton);
       }
       $('tbody').append(newRow);
 }
 
+function removeStudent(){
+      debugger;
+      student_array.splice($(event.currentTarget).attr('data-index'), 1);
+      $('.student-table-row').remove();
+      updateStudentList();
+      console.log(student_array);
+}
 /***************************************************************************************************
  * updateStudentList - centralized function to update the average and call student list update
  * @param students {array} the array of student objects
