@@ -74,10 +74,12 @@ function addStudent(){
             course: $('#course').val(),
             grade: $('#studentGrade').val()
       }
-      if(studentInfo.name !== '' || studentInfo.course !== '' || studentInfo.grade !== '' || parseFloat(studentInfo.grade) >= 0 || parseFloat(studentInfo.grade) <= 100) {
+      if(studentInfo.name !== '' && studentInfo.course !== '' && studentInfo.grade !== '' && parseFloat(studentInfo.grade) >= 0 && parseFloat(studentInfo.grade) <= 100) {
             // $('.add').prop('disabled', false);
             student_array.push(studentInfo);
             clearAddStudentFormInputs();
+            $('.student-table-row').remove();
+            renderStudentOnDom(studentInfo);
             updateStudentList();
       }
       
@@ -94,35 +96,16 @@ function clearAddStudentFormInputs(){
  * into the .student_list tbody
  * @param {object} studentObj a single student object with course, name, and grade inside
  */
-function renderStudentOnDom(){
-      for(var studentIndex = 0; studentIndex < student_array.length; studentIndex++){
-            var newRow = $('<tr>', {
-                  class: 'student-table-row'
-            })
-            var displayName = $('<td>',{
-                  text: student_array[studentIndex].name,
-                  'class': 'col-xs-3 '
-            })
-            var displayCourse = $('<td>',{
-                  text: student_array[studentIndex].course,
-                  'class': 'col-xs-3'
-            })
-            var displayGrade = $('<td>',{
-                  text: student_array[studentIndex].grade,
-                  'class': 'col-xs-3'
-            })
-            var deleteButton = $('<td>').addClass('col-xs-3').append($('<button>',{
-                  text: 'Delete',
-                  class: 'btn btn-danger',
-                  attr: {
-                        'data-index': studentIndex
-                  },
-                  click: function(){
-                        removeStudent();
-                  }
-                   
-            }))
-            newRow.append(displayName, displayCourse, displayGrade, deleteButton);
+function renderStudentOnDom(studentObj){
+      var newRow = $('<tr>', {
+            class: 'student-table-row'
+      })
+      for (var property in studentObj) {
+            var studentData = $('<td>', {
+               class: 'col-xs-3',
+               text: studentObj[property]
+            });
+            newRow.append(studentData);
       }
       $('tbody').append(newRow);
 }
@@ -164,7 +147,13 @@ function calculateGradeAverage(){
  * @returns {undefined} none
  */
 function renderGradeAverage(){
-      $('.avgGrade').text(calculateGradeAverage);
+      var result = calculateGradeAverage();
+      console.log(result);
+      if(isNaN(result)){
+            $('.avgGrade').text('0');
+      }else{
+            $('.avgGrade').text(calculateGradeAverage);
+      }
 }
 
 function handleGetDataClicked(){
