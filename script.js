@@ -30,7 +30,6 @@ var student_array = [];
 */
 function initializeApp(){
       addClickHandlersToElements();
-
 }
 
 /***************************************************************************************************
@@ -42,6 +41,7 @@ function initializeApp(){
 function addClickHandlersToElements(){
       $('.add').on('click', handleAddClicked);
       $('.cancel').on('click', handleCancelClick);
+      $('.getData').on('click', handleGetDataClicked);
 }
 
 /***************************************************************************************************
@@ -75,6 +75,7 @@ function addStudent(){
             grade: $('#studentGrade').val()
       }
       if(studentInfo.name !== '' || studentInfo.course !== '' || studentInfo.grade !== '' || parseFloat(studentInfo.grade) >= 0 || parseFloat(studentInfo.grade) <= 100) {
+            // $('.add').prop('disabled', false);
             student_array.push(studentInfo);
             clearAddStudentFormInputs();
             updateStudentList();
@@ -108,7 +109,7 @@ function renderStudentOnDom(){
             })
             var displayGrade = $('<td>',{
                   text: student_array[studentIndex].grade,
-                  'class': 'col-xs-'
+                  'class': 'col-xs-3'
             })
             var deleteButton = $('<td>').addClass('col-xs-3').append($('<button>',{
                   text: 'Delete',
@@ -166,7 +167,19 @@ function renderGradeAverage(){
       $('.avgGrade').text(calculateGradeAverage);
 }
 
-
-
+function handleGetDataClicked(){
+      var studentData = {
+            url: "https://s-apis.learningfuze.com/sgt/get",
+            dataType: 'json',
+            method: 'post',
+            success: function(response){
+                  console.log('great success', response)
+            },
+            data: {
+                  api_key: 'E0aooQZMEC'
+            }
+      }
+      $.ajax(studentData);
+}
 
 
