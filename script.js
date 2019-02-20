@@ -28,7 +28,7 @@ function addStudent(){
             grade: $('#studentGrade').val(),
       }      
       var newStudentObj = {
-            url: "https://s-apis.learningfuze.com/sgt/create",
+            url: "http://localhost/SGT/server/createstudent.php",
             dataType: 'json',
             method: 'post',
             data: {
@@ -68,7 +68,7 @@ function renderStudentOnDom(studentObj){
       })
       var displayName = $('<td>',{
             text: studentObj.name,
-            'class': 'col-xs-3 '
+            'class': 'col-xs-3'
       })
       var displayCourse = $('<td>',{
             text: studentObj.course,
