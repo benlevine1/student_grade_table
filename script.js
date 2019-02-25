@@ -94,7 +94,7 @@ function renderStudentOnDom(studentObj){
 function removeStudent(studentObj){
       debugger;
       var deleteStudent = {
-            url: "https://s-apis.learningfuze.com/sgt/delete",
+            url: "http://localhost/SGT/server/deletestudent.php",
             dataType: 'json',
             method: 'post',
             data: {
@@ -142,7 +142,7 @@ function renderGradeAverage(){
 
 function getData(){
       var studentDataBase = {
-            url: "https://s-apis.learningfuze.com/sgt/get",
+            url: "http://localhost/SGT/server/getstudents.php",
             dataType: 'json',
             method: 'post',
             success: function(response){
