@@ -39,14 +39,16 @@ if(!empty( $output['error'])){
 }
   
 
-$query = "INSERT INTO `students` SET `name` = '{$_POST['name']}', `course`='{$_POST['course']}', `grade`={$_POST['grade']}";
+$query = "INSERT INTO `sgt` SET `name` = '{$_POST['name']}', `course`='{$_POST['course']}', `grade`={$_POST['grade']}";
 
 $result = mysqli_query($db, $query);
 
 if($result){
+  print('it worked');
   $output['success']=true;
-  $output['new_id']= mysql_insert_id ( $db );
+  $output['new_id']= mysqli_insert_id ( $db );
 } else {
+  print(mysqli_error($db));
   $output['error'][] = mysqli_error($db);
 }
 

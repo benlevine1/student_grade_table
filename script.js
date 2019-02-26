@@ -28,11 +28,11 @@ function addStudent(){
             grade: $('#studentGrade').val(),
       }      
       var newStudentObj = {
-            url: "http://localhost/SGT/server/createstudent.php",
+            url: "http://localhost:8888/SGT/server/createstudent.php",
             dataType: 'json',
             method: 'post',
             data: {
-                  api_key: 'E0aooQZMEC',
+                  // api_key: 'E0aooQZMEC',
                   name: $('#studentName').val(),
                   course: $('#course').val(),
                   grade: $('#studentGrade').val(),
@@ -49,7 +49,7 @@ function addStudent(){
             }else{
                   $('.modal-body > p').text('Error ' + response.errors);
                   $('#errorModal').modal();
-                  console.log('Error');
+                  console.log('Error', response.errors);
             }
       }).fail(err =>{
             $('.modal-body > p').text('Error ' + err.status + err.statusText);
@@ -94,7 +94,7 @@ function renderStudentOnDom(studentObj){
 function removeStudent(studentObj){
       debugger;
       var deleteStudent = {
-            url: "http://localhost/SGT/server/deletestudent.php",
+            url: "http://localhost:8888/SGT/server/deletestudent.php",
             dataType: 'json',
             method: 'post',
             data: {
@@ -142,7 +142,7 @@ function renderGradeAverage(){
 
 function getData(){
       var studentDataBase = {
-            url: "http://localhost/SGT/server/getstudents.php",
+            url: "http://localhost:8888/SGT/server/getstudents.php",
             dataType: 'json',
             method: 'post',
             success: function(response){
