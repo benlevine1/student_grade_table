@@ -5,12 +5,20 @@ var student_array = [];
 function initializeApp(){
       addClickHandlersToElements();
       getData();
+      // inputValidation();
 }
 
 function addClickHandlersToElements(){
       $('.add').on('click', handleAddClicked);
       $('.cancel').on('click', handleCancelClick);
       $('.getData').on('click', getData);
+      $('.editButton').on('click', showEditModal);
+      $('.close').on('click', clearEditStudentFormInputs)
+}
+
+function showEditModal(){
+      console.log('made it here')
+      $('#editModal').modal();
 }
 
 function handleAddClicked(){
@@ -19,6 +27,39 @@ function handleAddClicked(){
 
 function handleCancelClick(){
       clearAddStudentFormInputs();
+}
+
+// function inputValidation(){
+//       $('#studentName').change(validateName($('#studentName').val()));
+//       $('#course').change(validateCourse($('#course').val()));
+//       $('#studentGrade').change(validateGrade($('#studentGrade').val()));
+// }
+
+function validateName(input){
+      // /^[a-z ,.'-]+$/i for names
+      var namePattern = /^[a-z ,.'-]+$/i
+      if(namePattern.test(input)){
+            console.log('valid name');
+      }else{
+            console.log('invalid name');
+      }
+}
+
+function validateGrade(input){
+      if($.isNumeric(input) && input.length < 6 && input >= 0 && input <=100){
+            console.log('valid grade');
+      }else{
+            console.log('please enter a valid grade');
+      }
+}
+
+function validateCourse(input){
+      var coursePattern = /^[A-Za-z0-9]{2,30}+$/i
+      if(coursePattern.test(input)){
+            console.log('valid course');
+      }else{
+            console.log('invalid course');
+      }
 }
 
 function addStudent(){
@@ -58,8 +99,12 @@ function addStudent(){
 }
 
 function clearAddStudentFormInputs(){
-      $('input').val('');
+      $('.student-add-form input').val('');
       console.log('cleared');
+}
+
+function clearEditStudentFormInputs(){
+      $('#editModal input').val('');
 }
 
 function renderStudentOnDom(studentObj){
@@ -78,18 +123,42 @@ function renderStudentOnDom(studentObj){
             text: studentObj.grade,
             'class': 'col-xs-3'
       })
-      var deleteButton = $('<td>').addClass('col-xs-3').append($('<button>',{
+      var deleteButton = $('<td>').addClass('col-xs-3 operations').append($('<button>',{
             text: 'Delete',
             class: 'btn btn-danger',
             click: function(){
                   removeStudent(studentObj);
             }
-             
-      }))
+      }));
+      debugger;
+      var editButton = $('<button>',{
+            text: 'Edit',
+            class: 'btn btn-primary',
+            click: function(){
+                  // updateStudent(studentObj);
+                  showEditModal();
+
+            }
+      });
+      deleteButton.append(editButton)
       newRow.append(displayName, displayCourse, displayGrade, deleteButton);
       $('tbody').append(newRow);
 
 }
+
+// function updateStudent(studentObj){
+//       var updateStudent = {
+//             url: "http://localhost:8888/SGT/server/updatestudent.php",
+//             datatype: 'json',
+//             method: 'post',
+//             data: {student_id: studentObj.id}
+//       }
+//       $.ajax(updateStudent).then(function(){
+//             var studentIndex = student_array.indexOf(studentObj);
+
+//             updateStudentList(student_array)
+//       })
+// }
 
 function removeStudent(studentObj){
       debugger;
@@ -98,7 +167,6 @@ function removeStudent(studentObj){
             dataType: 'json',
             method: 'post',
             data: {
-                  api_key: 'E0aooQZMEC',
                   student_id: studentObj.id
             }
       }
@@ -107,6 +175,7 @@ function removeStudent(studentObj){
             student_array.splice(studentIndex, 1);
             $('.student-table-row').remove();
             updateStudentList(student_array);
+            getData();
             console.log(student_array);
       })
      
@@ -144,7 +213,7 @@ function getData(){
       var studentDataBase = {
             url: "http://localhost:8888/SGT/server/getstudents.php",
             dataType: 'json',
-            method: 'post',
+            method: 'get',
             success: function(response){
                  var studentData =  response.data;
                  student_array = studentData;
@@ -152,7 +221,7 @@ function getData(){
                  console.log(response);
             },
             data: {
-                  api_key: 'E0aooQZMEC'
+                  // api_key: 'E0aooQZMEC'
             }
       }
       $.ajax(studentDataBase);

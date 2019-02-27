@@ -1,9 +1,5 @@
 <?php
 
-/*
-{"success": true, "new_id":1089}
-*/
-
 require_once('mysqlcredentials.php');
 
 $output = [
@@ -37,21 +33,20 @@ if(!empty( $output['error'])){
   print(json_encode( $output));
   exit();
 }
-  
 
-$query = "INSERT INTO `sgt` SET `name` = '{$_POST['name']}', `course`='{$_POST['course']}', `grade`={$_POST['grade']}";
-
-$result = mysqli_query($db, $query);
+$query = "UPDATE `sgt` SET `name` = '{$_POST['name']}', `course`='{$_POST['course']}', `grade`={$_POST['grade']} WHERE `id` = {$_POST['id']}";
+print($query);
+$result = mysqli_query( $db, $query );
 
 if($result){
-  print('it worked');
+  print('successfully updated');
   $output['success']=true;
-  $output['new_id']= mysqli_insert_id ( $db );
 } else {
   print(mysqli_error($db));
   $output['error'][] = mysqli_error($db);
 }
 
 $json_output = json_encode( $output);
+
 
 ?>
