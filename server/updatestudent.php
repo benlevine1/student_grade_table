@@ -35,6 +35,7 @@ if(!empty( $output['error'])){
 }
 
 $query = "UPDATE `sgt` SET `name` = '{$_POST['name']}', `course`='{$_POST['course']}', `grade`={$_POST['grade']} WHERE `id` = {$_POST['id']}";
+
 print($query);
 $result = mysqli_query( $db, $query );
 
