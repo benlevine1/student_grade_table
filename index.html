@@ -93,16 +93,15 @@
                    placeholder="Student Grade">
         </div>
         <button type="button" class="add btn btn-success text-white">Add</button>
-        <button type="button" class="cancel btn btn-default">Cancel</button>
-        <button type="button" class="getData btn btn-info">Get Data From Server</button>
+        <button type="reset" value="Reset" class="cancel btn btn-default">Cancel</button>
     </form>
     <div class="student-list-container page-header media-heading col-xs-12 col-sm-9 col-sm-pull-3", style="overflow:auto">
         <table class="student-list table-responsive">
             <thead>
             <tr>
-                <th class="display-name">Student Name</th>
-                <th class="display-course">Student Course</th>
-                <th class="display-grade">Student Grade</th>
+                <th class="display-name">Name</th>
+                <th class="display-course">Course</th>
+                <th class="display-grade">Grade</th>
                 <th class="display-delete">Operations</th>
             </tr>
             </thead>
@@ -115,7 +114,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close clear" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Edit Student</h4>
+              <h4 class="modal-title">Edit Entry</h4>
             </div>
             <div class="modal-body">
                 <form>

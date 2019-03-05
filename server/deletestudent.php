@@ -14,7 +14,7 @@ $result = mysqli_query( $db, $query );
 
 
 if($result){
-  if(mysql_affected_rows($db)===1){
+  if(mysqli_affected_rows($db)===1){
     $output['success'] = true;
   } else{
     $output['error'] = 'could not delete student';
@@ -25,5 +25,6 @@ if($result){
 
 $json_output = json_encode ($output);
 
-print($json_output);
+print $json_output;
+
 ?>

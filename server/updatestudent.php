@@ -36,18 +36,17 @@ if(!empty( $output['error'])){
 
 $query = "UPDATE `sgt` SET `name` = '{$_POST['name']}', `course`='{$_POST['course']}', `grade`={$_POST['grade']} WHERE `id` = {$_POST['id']}";
 
-print($query);
 $result = mysqli_query( $db, $query );
 
 if($result){
-  print('successfully updated');
   $output['success']=true;
 } else {
   print(mysqli_error($db));
-  $output['error'][] = mysqli_error($db);
+  $output['error'] = mysqli_error($db);
 }
 
 $json_output = json_encode( $output);
 
+print $json_output;
 
 ?>

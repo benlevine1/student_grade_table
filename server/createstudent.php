@@ -44,14 +44,16 @@ $query = "INSERT INTO `sgt` SET `name` = '{$_POST['name']}', `course`='{$_POST['
 $result = mysqli_query($db, $query);
 
 if($result){
-  print('it worked');
+  // print('it worked');
   $output['success']=true;
   $output['new_id']= mysqli_insert_id ( $db );
 } else {
-  print(mysqli_error($db));
+  // print(mysqli_error($db));
   $output['error'][] = mysqli_error($db);
 }
 
 $json_output = json_encode( $output);
+
+print $json_output;
 
 ?>
