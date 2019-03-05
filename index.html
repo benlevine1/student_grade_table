@@ -25,6 +25,42 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="confirmModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" id="confirm-close" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="confirm-modal-title">Add Student</h3>
+        </div>
+        <div class="confirm-modal-body">
+            <p class="confirm-name">Student Name: <b class="confirm-name-text"></b></p>
+            <p class="confirm-course">Student Course: <b class="confirm-course-text"></b></p>
+            <p class="confirm-grade">Student Grade: <b class="confirm-grade-text"></b></p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default confirm" data-dismiss="modal">Close</button>
+            <button type="button" id="confirm" class="btn btn-primary" data-dismiss="modal" >Confirm</button>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" id="confirm-close" class="close" data-dismiss="modal">&times;</button>
+            <!-- <h3 class="delete-modal-title">Remove Entry</h3> -->
+        </div>
+        <div class="delete-modal-body">
+            <h4 class="text-center">Are you sure you want to remove this entry?</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default confirm" data-dismiss="modal">Close</button>
+            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal" >Confirm</button>
+        </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="page-header media-heading">
         <h1 class="hidden-xs">Student Grade Table
@@ -34,7 +70,7 @@
             <small class = 'pull-right'>Grade Average : <span class="label label-default avgGrade">0</span></small>
         </h3>
     </div>
-    <div class="student-add-form col-xs-12 col-sm-3 col-sm-push-9">
+    <form class="student-add-form col-xs-12 col-sm-3 col-sm-push-9">
         <h4>Add Student</h4>
         <div class = 'form-group input-group col-xs-12 nameInput'>
             <span class="input-group-addon">
@@ -59,7 +95,7 @@
         <button type="button" class="add btn btn-success text-white">Add</button>
         <button type="button" class="cancel btn btn-default">Cancel</button>
         <button type="button" class="getData btn btn-info">Get Data From Server</button>
-    </div>
+    </form>
     <div class="student-list-container page-header media-heading col-xs-12 col-sm-9 col-sm-pull-3", style="overflow:auto">
         <table class="student-list table-responsive">
             <thead>
@@ -74,7 +110,6 @@
             </tbody>
         </table>
     </div>
-    <button class="editButton">Edit</button>
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">

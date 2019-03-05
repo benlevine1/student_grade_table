@@ -9,24 +9,45 @@ function initializeApp(){
 }
 
 function addClickHandlersToElements(){
-      $('.add').on('click', handleAddClicked);
+      $('.add').on('click', confirmModal);
+      $('#confirm').on('click', handleConfirmClicked);
+      $('#confirmDelete').on('click',  )
       $('.cancel').on('click', handleCancelClick);
       $('.getData').on('click', getData);
       $('.editButton').on('click', showEditModal);
-      $('.clear').on('click', clearEditStudentFormInputs)
+      $('.clear').on('click', clearEditStudentFormInputs);
+      // $('#confirm-close').on('click', clearConfirmModal);
 }
+
+
+// $('#editModal').on('show.bs.modal', function(event){
+//       var id = $(event.target).attr('data-id');
+//       console.log('id from student table', id);
+// })
+
 
 function showEditModal(){
       // console.log('made it here')
-      clearAddStudentFormInputs();
+      // AddStudentFormInputs();
+      var whatIsThis = $(this)
+      $('.form-group').removeClass('has-error has-success');
+      $('span#helpBlock2').remove();
       $('#editModal').on('hidden.bs.modal', function(){
             $(this).find('form')[0].reset();
         });
       $('#editModal').modal();
 }
 
-function handleAddClicked(){
+function showDeleteModal(){
+      $('#deleteModal').modal();
+}
+
+function handleConfirmClicked(){
       addStudent();
+}
+
+function handleConfirmDeleteClicked(){
+      removeStudent
 }
 
 function handleCancelClick(){
@@ -147,6 +168,13 @@ function validateEditGrade(input){
       }
 }
 
+function confirmModal(){
+      $('.confirm-name-text').text($('#studentName').val());
+      $('.confirm-course-text').text($('#course').val());
+      $('.confirm-grade-text').text($('#studentGrade').val());
+      $('#confirmModal').modal()
+}
+
 function addStudent(){
       var studentInfo = {
             name: $('#studentName').val(),
@@ -194,9 +222,10 @@ function clearEditStudentFormInputs(){
       $('#editModal input').val('');
 }
 
-function renderStudentOnDom(studentObj, index){
+function renderStudentOnDom(studentObj){
       var newRow = $('<tr>', {
-            class: `student-table-row student-${index}`
+            class: `student-table-row`,
+            'data-id': studentObj.id
       })
       var displayName = $('<td>',{
             text: studentObj.name,
@@ -213,13 +242,16 @@ function renderStudentOnDom(studentObj, index){
       var deleteButton = $('<td>').addClass('col-xs-3 operations').append($('<button>',{
             text: 'Delete',
             class: 'btn btn-danger',
+            'data-id': studentObj.id,
             click: function(){
-                  removeStudent(studentObj);
+                  // removeStudent(studentObj);
+                  showDeleteModal();
             }
       }));
       var editButton = $('<button>',{
             text: 'Edit',
             class: 'btn btn-primary',
+            'data-id': studentObj.id,
             click: function(){
                   // updateStudent(studentObj);
                   showEditModal();
@@ -266,8 +298,8 @@ function removeStudent(studentObj){
             var studentIndex = student_array.indexOf(studentObj);
             student_array.splice(studentIndex, 1);
             $('.student-table-row').remove();
-            updateStudentList(student_array);
             getData();
+            updateStudentList(student_array);
             console.log(student_array);
       })
      
