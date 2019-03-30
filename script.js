@@ -105,7 +105,7 @@ function validateEditName(input){
 }
 
 function validateCourse(input){
-      var coursePattern = /^[A-Za-z0-9\s]{2,30}$/i
+      var coursePattern = /^[A-Za-z0-9\s]{2,50}$/i
       if(coursePattern.test(input)){
             $('.courseInput').removeClass('has-error');
             $('.courseError').remove();

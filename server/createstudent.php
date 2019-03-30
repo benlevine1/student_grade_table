@@ -1,8 +1,5 @@
 <?php
 
-/*
-{"success": true, "new_id":1089}
-*/
 
 require_once('mysqlcredentials.php');
 
