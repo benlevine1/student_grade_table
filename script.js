@@ -172,7 +172,7 @@ function addStudent(){
             grade: $('#studentGrade').val(),
       }      
       var newStudentObj = {
-            url: "http://localhost:8888/SGT/server/createstudent.php",
+            url: "server/createstudent.php",
             dataType: 'json',
             method: 'post',
             data: {
@@ -199,7 +199,7 @@ function addStudent(){
 
 function editStudent(id, name, course, grade){
       var editStudentObj ={
-            url: "http://localhost:8888/SGT/server/updatestudent.php",
+            url: "server/updatestudent.php",
             dataType: 'json',
             method: 'post',
             data: {
@@ -273,7 +273,7 @@ function renderStudentOnDom(studentObj){
 
 function removeStudent(student_id){
       var deleteStudent = {
-            url: "http://localhost:8888/SGT/server/deletestudent.php",
+            url: "server/deletestudent.php",
             dataType: 'json',
             method: 'post',
             data: {
@@ -321,7 +321,7 @@ function renderGradeAverage(){
 
 function getData(){
       var studentDataBase = {
-            url: "http://localhost:8888/SGT/server/getstudents.php",
+            url: "server/getstudents.php",
             dataType: 'json',
             method: 'get',
             success: function(response){
