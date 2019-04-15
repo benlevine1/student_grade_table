@@ -192,7 +192,7 @@ function addStudent(){
                   $('#errorModal').modal();
             }
       }).fail(err =>{
-            $('.modal-body > p').text('Error ' + err.status + err.statusText);
+            $('.modal-body > p').text('Error while loading data, check your internet connection and try again.');
             $('#errorModal').modal();
       })
 }
