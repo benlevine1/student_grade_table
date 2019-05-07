@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <meta name="viewport" content="initial-scale=1, user-scalable=no">
+</head>
+<body>
+<div class="modal fade" id="errorModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="modal-title"></h3>
+        </div>
+        <div class="modal-body">
+            <p></p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="confirmModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" id="confirm-close" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="confirm-modal-title">Add Student</h3>
+        </div>
+        <div class="confirm-modal-body">
+            <p class="confirm-name">Student Name: <b class="confirm-name-text"></b></p>
+            <p class="confirm-course">Student Course: <b class="confirm-course-text"></b></p>
+            <p class="confirm-grade">Student Grade: <b class="confirm-grade-text"></b></p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default confirm" data-dismiss="modal">Close</button>
+            <button type="button" id="confirm" class="btn btn-primary" data-dismiss="modal" >Confirm</button>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" id="confirm-close" class="close" data-dismiss="modal">&times;</button>
+            <!-- <h3 class="delete-modal-title">Remove Entry</h3> -->
+        </div>
+        <div class="delete-modal-body">
+            <h4 class="text-center">Are you sure you want to remove this entry?</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default confirm" data-dismiss="modal">Close</button>
+            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal" >Confirm</button>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="page-header media-heading">
+        <h1 class="hidden-xs">Student Grade Table
+            <small class="pull-right ">Grade Average : <span class="label label-default avgGrade">0   </span></small>
+        </h1>
+        <h3 class="hidden-sm hidden-md hidden-lg col-xs-12">Student Grade Table
+            <small class = 'pull-right'>Grade Average : <span class="label label-default avgGrade">0</span></small>
+        </h3>
+    </div>
+    <form class="student-add-form col-xs-12 col-sm-3 col-sm-push-9">
+        <h4>Add Student</h4>
+        <div class = 'form-group input-group col-xs-12 nameInput'>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-user"></span>
+            </span>
+            <input type="text" class="form-control form-rounded" name="studentName" id="studentName" placeholder="Student Name" aria-describedby="helpBlock2">
+        </div>
+        <div class="form-group input-group col-xs-12 courseInput">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-list-alt"></span>
+            </span>
+            <input type="text" class="form-control form-rounded" name="course" id="course"
+                   placeholder="Student Course">
+        </div>
+        <div class="form-group input-group col-xs-12 gradeInput">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-education"></span>
+            </span>
+            <input type="text" class="form-control form-rounded" name="studentGrade" id="studentGrade"
+                   placeholder="Student Grade">
+        </div>
+        <button type="button" class="add btn btn-success text-white">Add</button>
+        <button type="reset" value="Reset" class="cancel btn btn-default">Cancel</button>
+    </form>
+    <div class="student-list-container page-header media-heading col-xs-12 col-sm-9 col-sm-pull-3", style="overflow:auto">
+        <table class="student-list table-responsive">
+            <thead>
+            <tr>
+                <th class="display-name">Name</th>
+                <th class="display-course">Course</th>
+                <th class="display-grade">Grade</th>
+                <th class="display-delete">Operations</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close clear" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Edit Entry</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group editNameInput">
+                        <label class="control-label" for="inputSuccess1">Name</label>
+                        <input type="text" class="form-control" id="editName" aria-describedby="helpBlock2">
+                        <span id="helpBlock2" class="help-block"></span>
+                    </div>
+                    <div class="form-group editCourseInput">
+                        <label class="control-label" for="inputSuccess1">Course</label>
+                        <input type="text" class="form-control" id="editCourse" aria-describedby="helpBlock2">
+                        <span id="helpBlock2" class="help-block"></span>
+                    </div>
+                    <div class="form-group editGradeInput">
+                        <label class="control-label" for="inputSuccess1">Grade</label>
+                        <input placeholder=""type="text" class="form-control" id="editGrade" aria-describedby="helpBlock2">
+                        <span id="helpBlock2" class="help-block"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default clear" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary save">Save changes</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+</div>
+</body>
+</html>
+
