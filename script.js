@@ -313,7 +313,7 @@ function calculateGradeAverage(){
             sum += parseInt(student_array[studentIndex].grade);
       }
       var average = sum/student_array.length;
-      return average;
+      return average.toFixed(2);
 }
 
 function renderGradeAverage(){
