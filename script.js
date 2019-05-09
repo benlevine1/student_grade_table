@@ -232,6 +232,12 @@ function clearEditStudentFormInputs(){
 }
 
 function renderStudentOnDom(studentObj){
+      if (!studentObj){
+            var noData = $('<h1>', {
+                  text: 'There is currently no student data to display, please add a student.'
+            })
+            $('tbody').append(noData);
+      }
       var newRow = $('<tr>', {
             class: `student-table-row`,
             'data-id': studentObj.id
